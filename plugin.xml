@@ -21,11 +21,12 @@
   <engines>
     <engine name="cordova" version=">=3.0.0"/>
   </engines>
+  comentado MVL -->
 
+  
   <js-module src="www/SocialSharing.js" name="SocialSharing">
     <clobbers target="window.plugins.socialsharing" />
   </js-module>
-  comentado MVL -->
 
 
   <!-- ios -->
