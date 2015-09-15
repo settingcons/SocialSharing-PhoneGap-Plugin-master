@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="settingconsultoria.cordova.plugins.socialsharing"
-        version="0.0.3">
+        version="0.0.4">
 
   <name>SocialSharing</name>
 
@@ -23,7 +23,7 @@
   </engines>
   comentado MVL -->
 
-  
+
   <js-module src="www/SocialSharing.js" name="SocialSharing">
     <clobbers target="window.plugins.socialsharing" />
   </js-module>
