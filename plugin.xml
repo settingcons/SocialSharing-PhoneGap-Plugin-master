@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="settingconsultoria.cordova.plugins.socialsharing"
-        version="0.0.2">
+        version="0.0.3">
 
   <name>SocialSharing</name>
 
@@ -11,24 +11,22 @@
     Android is fully supported, as well as iOS 6 and up. WP8 has somewhat limited support.
   </description>
 
+  <!-- comentado MVL
   <author>Eddy Verbruggen</author>
-
   <license>MIT</license>
-
   <keywords>Social, Share, Twitter, Facebook, Email, SMS, WhatsApp, Tumblr, Pocket, LinkedIN</keywords>
-
   <repo>https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git</repo>
-
   <issue>https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin/issues</issue>
 
   <engines>
-    <!--<engine name="cordova" version=">=3.0.0"/>-->
-    <engine name="cordova" version="3.5.1"/>
+    <engine name="cordova" version=">=3.0.0"/>
   </engines>
 
   <js-module src="www/SocialSharing.js" name="SocialSharing">
     <clobbers target="window.plugins.socialsharing" />
   </js-module>
+  comentado MVL -->
+
 
   <!-- ios -->
   <platform name="ios">
