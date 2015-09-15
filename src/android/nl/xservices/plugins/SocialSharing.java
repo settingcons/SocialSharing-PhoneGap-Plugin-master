@@ -136,9 +136,9 @@ public class SocialSharing extends CordovaPlugin {
             ArrayList<Uri> fileUris = new ArrayList<Uri>();
             final String dir = getDownloadDir();
             for (int i = 0; i < files.length(); i++) {
-              //final Uri fileUri = getFileUriAndSetType(draft, dir, files.getString(i), subject, i);
+              final Uri fileUri = getFileUriAndSetType(draft, dir, files.getString(i), subject, i);
 			  // MVL 14.09.2015
-              final Uri fileUri = getFileUriAndSetTypeAudio(draft, dir, files.getString(i), subject, i);	
+              //final Uri fileUri = getFileUriAndSetTypeAudio(draft, dir, files.getString(i), subject, i);	
 			  if (fileUri != null) {
                 fileUris.add(fileUri);
               }
@@ -185,9 +185,9 @@ public class SocialSharing extends CordovaPlugin {
             final String dir = getDownloadDir();
             Uri fileUri = null;
             for (int i = 0; i < files.length(); i++) {
-              //fileUri = getFileUriAndSetType(sendIntent, dir, files.getString(i), subject, i);
+              fileUri = getFileUriAndSetType(sendIntent, dir, files.getString(i), subject, i);
 			  // MVL 14.09.2015
-              fileUri = getFileUriAndSetTypeAudio(sendIntent, dir, files.getString(i), subject, i);
+              //fileUri = getFileUriAndSetTypeAudio(sendIntent, dir, files.getString(i), subject, i);
               if (fileUri != null) {
                 fileUris.add(fileUri);
               }
@@ -286,7 +286,6 @@ public class SocialSharing extends CordovaPlugin {
     // we're assuming an image, but this can be any filetype you like
     String localImage = image;
     sendIntent.setType("image/*");
-    //sendIntent.setType("audio/*");	//MVL 14.09.2015
     if (image.startsWith("http") || image.startsWith("www/")) {
       String filename = getFileName(image);
       localImage = "file://" + dir + "/" + filename;
@@ -316,7 +315,6 @@ public class SocialSharing extends CordovaPlugin {
       final String encodedImg = image.substring(image.indexOf(";base64,") + 8);
       // correct the intent type if anything else was passed, like a pdf: data:application/pdf;base64,..
       if (!image.contains("data:image/")) {
-      //if (!image.contains("data:audio/")) {		// MVL 14.09.2015
         sendIntent.setType(image.substring(image.indexOf("data:") + 5, image.indexOf(";base64")));
       }
       // the filename needs a valid extension, so it renders correctly in target apps
@@ -337,10 +335,11 @@ public class SocialSharing extends CordovaPlugin {
     return Uri.parse(localImage);
   }
 
-    private Uri getFileUriAndSetTypeAudio(Intent sendIntent, String dir, String audio, String subject, int nthFile) throws IOException {
+    /*
+	private Uri getFileUriAndSetTypeAudio(Intent sendIntent, String dir, String audio, String subject, int nthFile) throws IOException {
     // we're assuming an audio, but this can be any filetype you like
     String localaudio = image;
-    //sendIntent.setType("audio/*");
+    //sendIntent.setType("image/*");
     sendIntent.setType("audio/*");	//MVL 14.09.2015
     if (audio.startsWith("http") || audio.startsWith("www/")) {
       String filename = getFileName(audio);
@@ -391,7 +390,7 @@ public class SocialSharing extends CordovaPlugin {
     }
     return Uri.parse(localaudio);
   }
-
+*/
   private boolean invokeSMSIntent(final CallbackContext callbackContext, JSONObject options, String p_phonenumbers) {
     final String message = options.optString("message");
     // TODO test this on a real SMS enabled device before releasing it
@@ -422,9 +421,9 @@ public class SocialSharing extends CordovaPlugin {
 
         try {
           if (image != null && !"".equals(image)) {
-            //final Uri fileUri = getFileUriAndSetType(intent, getDownloadDir(), image, subject, 0);
+            final Uri fileUri = getFileUriAndSetType(intent, getDownloadDir(), image, subject, 0);
 			// MVL 14.09.2015
-            final Uri fileUri = getFileUriAndSetTypeAudio(intent, getDownloadDir(), image, subject, 0);
+            //final Uri fileUri = getFileUriAndSetTypeAudio(intent, getDownloadDir(), image, subject, 0);
             if (fileUri != null) {
               intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             }
