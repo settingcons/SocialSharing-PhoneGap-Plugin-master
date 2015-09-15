@@ -23,7 +23,7 @@
 
   <engines>
     <!--<engine name="cordova" version=">=3.0.0"/>-->
-    <engine name="cordova" version="3.5.0"/>
+    <engine name="cordova" version="3.5.1"/>
   </engines>
 
   <js-module src="www/SocialSharing.js" name="SocialSharing">
