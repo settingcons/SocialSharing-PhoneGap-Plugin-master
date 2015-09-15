@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="settingconsultoria.cordova.plugins.socialsharing"
-        version="4.3.19">
+        version="0.0.1">
 
   <name>SocialSharing</name>
 
@@ -22,7 +22,8 @@
   <issue>https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin/issues</issue>
 
   <engines>
-    <engine name="cordova" version=">=3.0.0"/>
+    <!--<engine name="cordova" version=">=3.0.0"/>-->
+    <engine name="cordova" version="3.5.0"/>
   </engines>
 
   <js-module src="www/SocialSharing.js" name="SocialSharing">
