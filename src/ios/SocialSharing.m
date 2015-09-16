@@ -473,8 +473,9 @@
 		savePath = [[NSBundle mainBundle] pathForResource:image ofType:@"mp3"];
 		_documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
 		_documentInteractionController.UTI = @"net.whatsapp.audio";
-//		_documentInteractionController.delegate = self;
+		_documentInteractionController.delegate = self;
 		[_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated: YES];
+}
 	  
     } else {
       // append an url to a message, if both are passed
