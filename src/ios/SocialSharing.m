@@ -471,7 +471,8 @@
 		// CAMBIO A AUDIO FILE
 		// UIImage * iconImage = [UIImage imageNamed:@"myphoto.jpg"];
 		NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
-		savePath = [[NSBundle mainBundle] pathForResource:@"myaudio" ofType:@"mp3"];
+		// savePath = [[NSBundle mainBundle] pathForResource:@"myaudio" ofType:@"mp3"];
+		savePath = [[NSBundle mainBundle] pathForResource:@image];
 		// [UIImageJPEGRepresentation(iconImage, 1.0) writeToFile:savePath atomically:YES];
 		_documentationInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
 		_documentationInteractionController.UTI = @"net.whatsapp.audio";
