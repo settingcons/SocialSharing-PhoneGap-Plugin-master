@@ -461,7 +461,7 @@
     
     // with WhatsApp, we can share an image OR text+url.. image wins if set
     if (image != nil) {
-      NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.wai"];
+      NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
       [UIImageJPEGRepresentation(image, 1.0) writeToFile:savePath atomically:YES];
       _documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
       _documentInteractionController.UTI = @"net.whatsapp.image";
