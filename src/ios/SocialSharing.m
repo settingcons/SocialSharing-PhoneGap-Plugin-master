@@ -468,16 +468,13 @@
        [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.viewController.view animated: YES];
 
 	  
-//		// CAMBIO A AUDIO FILE
-//		// UIImage * iconImage = [UIImage imageNamed:@"myphoto.jpg"];
-//		NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
-//		// savePath = [[NSBundle mainBundle] pathForResource:@"myaudio" ofType:@"mp3"];
-//		savePath = [[NSBundle mainBundle] pathForResource:@image ofType:@"mp3"];
-//		// [UIImageJPEGRepresentation(iconImage, 1.0) writeToFile:savePath atomically:YES];
-//		_documentationInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
-//		_documentationInteractionController.UTI = @"net.whatsapp.audio";
-//		_documentationInteractionController.delegate = self;
-//    [_documentationInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated: YES];
+//		// CAMBIO A AUDIO FILE : http://stackoverflow.com/questions/27877225/share-file-audio-via-whatsapp
+		NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
+		savePath = [[NSBundle mainBundle] pathForResource:image ofType:@"mp3"];
+		_documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
+		_documentInteractionController.UTI = @"net.whatsapp.audio";
+//		_documentInteractionController.delegate = self;
+		[_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated: YES];
 	  
     } else {
       // append an url to a message, if both are passed
