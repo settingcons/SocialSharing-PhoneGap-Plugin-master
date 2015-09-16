@@ -461,22 +461,29 @@
     
     // with WhatsApp, we can share an image OR text+url.. image wins if set
     if (image != nil) {
-      // NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.wai"];
-      // [UIImageJPEGRepresentation(image, 1.0) writeToFile:savePath atomically:YES];
-      // _documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
-      // _documentInteractionController.UTI = @"net.whatsapp.image";
-      // [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.viewController.view animated: YES];
+//       NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.wai"];
+//       [UIImageJPEGRepresentation(image, 1.0) writeToFile:savePath atomically:YES];
+//       _documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
+//       _documentInteractionController.UTI = @"net.whatsapp.image";
+//       [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.viewController.view animated: YES];
+
+       NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
+       // [UIImageJPEGRepresentation(image, 1.0) writeToFile:savePath atomically:YES];
+       [image writeToFile:savePath atomically:YES];
+       _documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
+       _documentInteractionController.UTI = @"net.whatsapp.audio";
+       [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.viewController.view animated: YES];
+	   
 	  
-	  
-		// CAMBIO A AUDIO FILE
-		// UIImage * iconImage = [UIImage imageNamed:@"myphoto.jpg"];
-		NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
-		// savePath = [[NSBundle mainBundle] pathForResource:@"myaudio" ofType:@"mp3"];
-		savePath = [[NSBundle mainBundle] pathForResource:@image ofType:@"mp3"];
-		// [UIImageJPEGRepresentation(iconImage, 1.0) writeToFile:savePath atomically:YES];
-		_documentationInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
-		_documentationInteractionController.UTI = @"net.whatsapp.audio";
-		_documentationInteractionController.delegate = self;
+//		// CAMBIO A AUDIO FILE
+//		// UIImage * iconImage = [UIImage imageNamed:@"myphoto.jpg"];
+//		NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
+//		// savePath = [[NSBundle mainBundle] pathForResource:@"myaudio" ofType:@"mp3"];
+//		savePath = [[NSBundle mainBundle] pathForResource:@image ofType:@"mp3"];
+//		// [UIImageJPEGRepresentation(iconImage, 1.0) writeToFile:savePath atomically:YES];
+//		_documentationInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
+//		_documentationInteractionController.UTI = @"net.whatsapp.audio";
+//		_documentationInteractionController.delegate = self;
 
     [_documentationInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated: YES];
 	  
