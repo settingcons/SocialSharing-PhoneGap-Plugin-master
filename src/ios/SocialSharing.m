@@ -468,8 +468,7 @@
 //       [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.viewController.view animated: YES];
 
        NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
-       // [UIImageJPEGRepresentation(image, 1.0) writeToFile:savePath atomically:YES];
-       [image writeToFile:savePath atomically:YES];
+       [UIImageJPEGRepresentation(image, 1.0) writeToFile:savePath atomically:YES];
        _documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
        _documentInteractionController.UTI = @"net.whatsapp.audio";
        [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.viewController.view animated: YES];
