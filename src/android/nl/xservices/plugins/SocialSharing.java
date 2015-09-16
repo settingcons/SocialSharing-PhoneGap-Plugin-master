@@ -136,10 +136,7 @@ public class SocialSharing extends CordovaPlugin {
             ArrayList<Uri> fileUris = new ArrayList<Uri>();
             final String dir = getDownloadDir();
             for (int i = 0; i < files.length(); i++) {
-              //final Uri fileUri = getFileUriAndSetType(draft, dir, files.getString(i), subject, i);
-			  // Change getFileUriAndSetType function by getFileUriAndSetType. Control 
-			  // Change the type of image file by file audio
-              final Uri fileUri = getFileUriAndSetTypeAudio(draft, dir, files.getString(i), subject, i);	
+              final Uri fileUri = getFileUriAndSetType(draft, dir, files.getString(i), subject, i);
 			  if (fileUri != null) {
                 fileUris.add(fileUri);
               }
@@ -186,10 +183,7 @@ public class SocialSharing extends CordovaPlugin {
             final String dir = getDownloadDir();
             Uri fileUri = null;
             for (int i = 0; i < files.length(); i++) {
-              //fileUri = getFileUriAndSetType(sendIntent, dir, files.getString(i), subject, i);
-			  // Change getFileUriAndSetType function by getFileUriAndSetType. Control 
-			  // Change the type of image file by file audio
-              fileUri = getFileUriAndSetTypeAudio(sendIntent, dir, files.getString(i), subject, i);
+              fileUri = getFileUriAndSetType(sendIntent, dir, files.getString(i), subject, i);
               if (fileUri != null) {
                 fileUris.add(fileUri);
               }
@@ -287,7 +281,7 @@ public class SocialSharing extends CordovaPlugin {
   private Uri getFileUriAndSetType(Intent sendIntent, String dir, String image, String subject, int nthFile) throws IOException {
     // we're assuming an image, but this can be any filetype you like
     String localImage = image;
-    sendIntent.setType("image/*");
+    sendIntent.setType("audio/*");
     if (image.startsWith("http") || image.startsWith("www/")) {
       String filename = getFileName(image);
       localImage = "file://" + dir + "/" + filename;
@@ -337,62 +331,6 @@ public class SocialSharing extends CordovaPlugin {
     return Uri.parse(localImage);
   }
 
-    // New function : change the type of image file by file audio
-	private Uri getFileUriAndSetTypeAudio(Intent sendIntent, String dir, String audio, String subject, int nthFile) throws IOException {
-    // we're assuming an audio, but this can be any filetype you like
-    String localaudio = image;
-    //sendIntent.setType("image/*");
-    sendIntent.setType("audio/*");	//MVL 14.09.2015
-    if (audio.startsWith("http") || audio.startsWith("www/")) {
-      String filename = getFileName(audio);
-      localaudio = "file://" + dir + "/" + filename;
-      if (audio.startsWith("http")) {
-        // filename optimisation taken from https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin/pull/56
-        URLConnection connection = new URL(audio).openConnection();
-        String disposition = connection.getHeaderField("Content-Disposition");
-        if (disposition != null) {
-          final Pattern dispositionPattern = Pattern.compile("filename=([^;]+)");
-          Matcher matcher = dispositionPattern.matcher(disposition);
-          if (matcher.find()) {
-            filename = matcher.group(1).replaceAll("[^a-zA-Z0-9._-]", "");
-            localaudio = "file://" + dir + "/" + filename;
-          }
-        }
-        saveFile(getBytes(connection.getInputStream()), dir, filename);
-      } else {
-        saveFile(getBytes(webView.getContext().getAssets().open(audio)), dir, filename);
-      }
-    } else if (audio.startsWith("data:")) {
-      // safeguard for https://code.google.com/p/android/issues/detail?id=7901#c43
-      if (!audio.contains(";base64,")) {
-        sendIntent.setType("text/plain");
-        return null;
-      }
-      // audio looks like this: data:audio/png;base64,R0lGODlhDAA...
-      final String encodedImg = audio.substring(audio.indexOf(";base64,") + 8);
-      // correct the intent type if anything else was passed, like a pdf: data:application/pdf;base64,..
-      //if (!audio.contains("data:audio/")) {
-      if (!audio.contains("data:audio/")) {		// MVL 14.09.2015
-        sendIntent.setType(audio.substring(audio.indexOf("data:") + 5, audio.indexOf(";base64")));
-      }
-      // the filename needs a valid extension, so it renders correctly in target apps
-      final String imgExtension = audio.substring(audio.indexOf("/") + 1, audio.indexOf(";base64"));
-      String fileName;
-      // if a subject was passed, use it as the filename
-      // filenames must be unique when passing in multiple files [#158]
-      if (notEmpty(subject)) {
-        fileName = sanitizeFilename(subject) + (nthFile == 0 ? "" : "_" + nthFile) + "." + imgExtension;
-      } else {
-        fileName = "file" + (nthFile == 0 ? "" : "_" + nthFile) + "." + imgExtension;
-      }
-      saveFile(Base64.decode(encodedImg, Base64.DEFAULT), dir, fileName);
-      localaudio = "file://" + dir + "/" + fileName;
-    } else if (!audio.startsWith("file://")) {
-      throw new IllegalArgumentException("URL_NOT_SUPPORTED");
-    }
-    return Uri.parse(localaudio);
-  }
-
   private boolean invokeSMSIntent(final CallbackContext callbackContext, JSONObject options, String p_phonenumbers) {
     final String message = options.optString("message");
     // TODO test this on a real SMS enabled device before releasing it
@@ -423,10 +361,7 @@ public class SocialSharing extends CordovaPlugin {
 
         try {
           if (image != null && !"".equals(image)) {
-            //final Uri fileUri = getFileUriAndSetType(intent, getDownloadDir(), image, subject, 0);
-		    // Change getFileUriAndSetType function by getFileUriAndSetType. Control 
-			// Change the type of image file by file audio
-            final Uri fileUri = getFileUriAndSetTypeAudio(intent, getDownloadDir(), image, subject, 0);
+            final Uri fileUri = getFileUriAndSetType(intent, getDownloadDir(), image, subject, 0);
             if (fileUri != null) {
               intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             }
