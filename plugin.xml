@@ -19,9 +19,9 @@
   <issue>https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin/issues</issue>
   comentado MVL -->
 
-  <engines>
-    <engine name="cordova" version=">=3.0.0"/>
-  </engines>
+  <!--<engines>-->
+    <!--<engine name="cordova" version=">=3.0.0"/>-->
+  <!--</engines>-->
 
 
   <js-module src="www/SocialSharing.js" name="SocialSharing">
