@@ -461,19 +461,19 @@
     
     // with WhatsApp, we can share an image OR text+url.. image wins if set
     if (image != nil) {
-       // NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.wai"];
-       // [UIImageJPEGRepresentation(image, 1.0) writeToFile:savePath atomically:YES];
-       // _documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
-       // _documentInteractionController.UTI = @"net.whatsapp.image";
-       // [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.viewController.view animated: YES];
+        NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.wai"];
+        [UIImageJPEGRepresentation(image, 1.0) writeToFile:savePath atomically:YES];
+        _documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
+        _documentInteractionController.UTI = @"net.whatsapp.image";
+        [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.viewController.view animated: YES];
   
-		//CAMBIO A AUDIO FILE : http://stackoverflow.com/questions/27877225/share-file-audio-via-whatsapp
-		NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
-		savePath = [[NSBundle mainBundle] pathForResource:@"http://download.guitarbackingtrack.com/mp3/abba/waterloo.mp3" ofType:@"mp3"];
-		_documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
-		_documentInteractionController.UTI = @"net.whatsapp.audio";
-		_documentInteractionController.delegate = self;
-		[_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated: YES];
+		// CAMBIO A AUDIO FILE : http://stackoverflow.com/questions/27877225/share-file-audio-via-whatsapp
+		// NSString * savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.waa"];
+		// savePath = [[NSBundle mainBundle] pathForResource:@"http://download.guitarbackingtrack.com/mp3/abba/waterloo.mp3" ofType:@"mp3"];
+		// _documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
+		// _documentInteractionController.UTI = @"net.whatsapp.audio";
+		// _documentInteractionController.delegate = self;
+		// [_documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated: YES];
   
     } else {
       // append an url to a message, if both are passed
